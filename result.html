@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Detailed Analysis Report for Multimodal Deepfake Detection. View verification results and forensic insights.">
+    <title>DeepVision | Forensic Analysis Report</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container-fluid nav-wrapper">
+            <nav>
+                <a href="/" class="logo">
+                    <i class="fas fa-shield-halved"></i>
+                    DEEP<span>VISION</span>
+                </a>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="/home">Prediction</a></li>
+                        <li><a href="/graphs">Data Analysis</a></li>
+                        <li><a href="../static/DeepFake.html">Notebook</a></li>
+                    </ul>
+                    <a href="/logout" class="btn btn-nav">Log Out</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Results Section -->
+    <main class="container" style="padding: 4rem 0;">
+        <div class="section-header" style="text-align: left; margin-bottom: 3rem;">
+            <span
+                style="color: var(--accent); font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em;">Forensic
+                Evaluation</span>
+            <h1 style="margin-top: 0.5rem; font-size: 2.5rem;">Verification Analysis Report</h1>
+        </div>
+
+        <div class="forensic-report-container">
+
+            <!-- Video Preview Column -->
+            <div class="forensic-video-box">
+                <div class="forensic-video-card">
+                    <h3 style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                        <i class="fas fa-video" style="color: var(--accent);"></i> Source Media
+                    </h3>
+                    <video id="forensic-video-player" controls muted autoplay
+                        style="width: 100%; height: auto; background: #000; border-radius: 16px; border: 1px solid var(--border); display: block; aspect-ratio: 16 / 9; object-fit: contain;">
+                        <source src="{{ url_for('static', filename='uploads/' + video_path) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 1rem;">
+                        <div
+                            style="padding: 1rem; background: var(--bg-main); border-radius: 12px; font-size: 0.85rem; color: var(--text-muted);">
+                            <p><strong>Filename:</strong> {{ video_path }}</p>
+                            <p><strong>Decomposition Status:</strong> Complete</p>
+                        </div>
+
+                        <a href="{{ url_for('static', filename='uploads/' + video_path) }}" download
+                            class="btn btn-secondary"
+                            style="width: 100%; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.5rem; background: #334155;">
+                            <i class="fas fa-download"></i> Download Forensic Source
+                        </a>
+                        <p
+                            style="font-size: 0.75rem; color: var(--text-muted); text-align: center; margin-top: 0.5rem;">
+                            <i class="fas fa-info-circle"></i> If video doesn't play or displays a black screen,
+                            download it to view in VLC.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Analysis Details Column -->
+            <div class="forensic-details">
+                <div class="forensic-details-card">
+
+                    <div style="margin-bottom: 2rem;">
+                        <span
+                            style="font-weight: 600; color: var(--text-muted); display: block; margin-bottom: 0.75rem;">Authentication
+                            Status</span>
+
+                        {% if 'Fake' in prediction %}
+                        <div class="prediction-badge prediction-fake" style="font-size: 1.2rem; padding: 0.75rem 2rem;">
+                            <i class="fas fa-triangle-exclamation"></i> Manipulation Detected
+                        </div>
+                        {% else %}
+                        <div class="prediction-badge prediction-real" style="font-size: 1.2rem; padding: 0.75rem 2rem;">
+                            <i class="fas fa-circle-check"></i> Authentic Content
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="status-highlight">
+                        <p style="font-weight: 700; color: var(--primary); font-size: 0.9rem; margin-bottom: 0.25rem;">
+                            Synopsis Output
+                        </p>
+                        <p style="font-size: 1.75rem; font-family: 'Outfit'; font-weight: 800; color: var(--accent);">
+                            {{ output_format }}
+                        </p>
+                        <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 0.5rem;">
+                            Document-style final result derived from the predicted class.
+                        </p>
+                    </div>
+
+                    <div class="status-highlight">
+                        <p style="font-weight: 700; color: var(--primary); font-size: 0.9rem; margin-bottom: 0.25rem;">
+                            Forensic Classification</p>
+                        <p style="font-size: 1.5rem; font-family: 'Outfit'; font-weight: 800; color: var(--accent);">{{
+                            prediction }}</p>
+                    </div>
+
+                    <div class="insight-content">
+                        <h4 style="margin-bottom: 1rem;"><i class="fas fa-magnifying-glass-chart"></i> Forensic Insight
+                        </h4>
+
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">
+                            <strong>Output Rule:</strong>
+                            {% if output_format == 'Spoof' %}
+                            Any predicted class containing a fake video stream or fake audio stream is reported as <strong>Spoof</strong>.
+                            {% else %}
+                            When both the video and audio streams are predicted as real, the final result is reported as <strong>Real</strong>.
+                            {% endif %}
+                        </p>
+
+                        {% if prediction == 'FakeVideo-FakeAudio' %}
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Full multi-stream synthetic generation
+                            detected. Both visual temporal signals and acoustic resonance show non-organic generation
+                            patterns typical of modern deep neural avatars.</p>
+                        <div style="font-size: 0.875rem; color: var(--error); font-weight: 600;">Security Level: High
+                            Risk</div>
+
+                        {% elif prediction == 'FakeVideo-RealAudio' %}
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Video frames exhibit blend-shape
+                            inconsistencies and temporal artifacting around facial regions. While the audio stream
+                            passes organic verification, the visual stream is synthesized.</p>
+                        <div style="font-size: 0.875rem; color: var(--accent); font-weight: 600;">Detection Type: Face
+                            Swap Manipulation</div>
+
+                        {% elif prediction == 'RealVideo-FakeAudio' %}
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Visual capture signals are authentic,
+                            but the acoustic track contains neural speech synthesis artifacts and frequency
+                            irregularities. This suggests an original video with a cloned audio track.</p>
+                        <div style="font-size: 0.875rem; color: var(--accent); font-weight: 600;">Detection Type: Neural
+                            Voice Over / Cloning</div>
+
+                        {% elif prediction == 'RealVideo-RealAudio' %}
+                        <p style="color: var(--text-muted); margin-bottom: 1rem;">Authentication pass successful. No
+                            significant synthetic patterns detected in either visual facial geometry or acoustic
+                            frequency models. Content is verified as human-recorded.</p>
+                        <div style="font-size: 0.875rem; color: var(--success); font-weight: 600;">Security Level:
+                            Verified Safe</div>
+                        {% endif %}
+                    </div>
+
+                    {% if email_status %}
+                    <div style="margin-top: 2rem; padding: 1rem 1.25rem; border-radius: 12px; border: 1px solid var(--border); background: var(--bg-main);">
+                        <p style="font-weight: 700; margin-bottom: 0.5rem; color: var(--primary);">
+                            SMTP Mail Alert
+                        </p>
+                        {% if email_status.sent %}
+                        <p style="color: var(--success); margin-bottom: 0.25rem;">
+                            Alert sent to {{ email_status.recipient }}
+                        </p>
+                        {% else %}
+                        <p style="color: var(--error); margin-bottom: 0.25rem;">
+                            Alert not sent
+                        </p>
+                        {% endif %}
+                        <p style="color: var(--text-muted); font-size: 0.9rem;">
+                            {{ email_status.message }}
+                        </p>
+                    </div>
+                    {% endif %}
+
+                    <div
+                        style="margin-top: 3rem; border-top: 1px solid var(--border); padding-top: 2rem; display: flex; gap: 1rem;">
+                        <a href="/home" class="btn" style="flex: 1; text-align: center;">Analyze New</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Technical Decomposition Section -->
+        <section style="margin-top: 6rem;">
+            <div class="header-small" style="text-align: center; margin-bottom: 4rem;">
+                <h2 style="font-size: 2rem;">Forensic Breakdown</h2>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Visual Signal</h3>
+                    {% if 'FakeVideo' in prediction %}
+                    <p style="color: var(--error); font-weight: 600;">Artifacts Detected</p>
+                    <p style="font-size: 0.9rem;">Temporal inconsistencies and facial blend-shape anomalies identified.
+                    </p>
+                    {% else %}
+                    <p style="color: var(--success); font-weight: 600;">Signals Organic</p>
+                    <p style="font-size: 0.9rem;">Skin textures and lighting reflections consistent with natural
+                        capture.</p>
+                    {% endif %}
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-wave-square"></i>
+                    <h3>Audio Signal</h3>
+                    {% if 'FakeAudio' in prediction %}
+                    <p style="color: var(--error); font-weight: 600;">Synthesized</p>
+                    <p style="font-size: 0.9rem;">Spectral irregularities and robotic frequency patterns detected.</p>
+                    {% else %}
+                    <p style="color: var(--success); font-weight: 600;">Signals Organic</p>
+                    <p style="font-size: 0.9rem;">Acoustic resonance and breathing patterns match organic speech.</p>
+                    {% endif %}
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-sync"></i>
+                    <h3>Cross-Modal Sync</h3>
+                    <p style="font-size: 0.9rem;">Decomposition of lip-sync and audio alignment across temporal frames.
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer style="margin-top: 4rem;">
+        <div class="container footer-content">
+            <p class="copyright">© 2026 DeepVision Forensic Analysis. Enterprise-Grade Verification.</p>
+        </div>
+    </footer>
+
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

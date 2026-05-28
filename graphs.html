@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Technical Performance Benchmarks and Data Visualization for DeepVision Deepfake Detection Models.">
+    <title>DeepVision | Data Analysis & Benchmarks</title>
+    
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container-fluid nav-wrapper">
+            <nav>
+                <a href="/" class="logo">
+                    <i class="fas fa-shield-halved"></i>
+                    DEEP<span>VISION</span>
+                </a>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="/home">Prediction</a></li>
+                        <li><a href="/graphs" class="active">Data Analysis</a></li>
+                        <li><a href="{{ url_for('static', filename='DeepFake.html') }}">Notebook</a></li>
+                    </ul>
+                    <a href="/logout" class="btn btn-nav">Log Out</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" style="padding: 4rem 2rem;">
+        <div class="section-header" style="text-align: left; margin-bottom: 4rem;">
+            <span style="color: var(--accent); font-weight: 700; text-transform: uppercase;">Technical Benchmarks</span>
+            <h1 style="margin-top: 0.5rem; font-size: 3rem;">Model Performance Analysis</h1>
+            <p style="margin-top: 1rem; max-width: 800px;">Comprehensive visualization of dataset distribution and performance metrics across multiple deep learning architectures used in the DeepVision system.</p>
+        </div>
+
+        <div class="visualization-grid">
+            
+            <!-- Class Distribution -->
+            <div class="viz-card">
+                <div class="viz-img-wrapper" onclick="zoomImage(this)">
+                    <img src="../static/download.png" alt="Class Distribution">
+                </div>
+                <div class="viz-info">
+                    <h3>Class Distribution</h3>
+                    <p>Analysis of the training dataset balance across Real and Fake categories to ensure unbiased model training and high generalization capability.</p>
+                </div>
+            </div>
+
+            <!-- Lightweight CNN Confusion Matrix -->
+            <div class="viz-card">
+                <div class="viz-img-wrapper" onclick="zoomImage(this)">
+                    <img src="../static/download (1).png" alt="Lightweight CNN Confusion Matrix">
+                </div>
+                <div class="viz-info">
+                    <h3>Lightweight CNN Confusion Matrix</h3>
+                    <p>Breakdown of True Positives, True Negatives, and misclassification rates specifically for our edge-optimized Lightweight CNN architecture.</p>
+                </div>
+            </div>
+
+            <!-- Lightweight CNN Model Performance Metrics -->
+            <div class="viz-card">
+                <div class="viz-img-wrapper" onclick="zoomImage(this)">
+                    <img src="../static/download (2).png" alt="Lightweight CNN Model Performance Metrics">
+                </div>
+                <div class="viz-info">
+                    <h3>Lightweight CNN Performance Metrics</h3>
+                    <p>Visualization of Training vs Validation accuracy and loss curves for the CNN model, monitoring convergence and potential over-fitting.</p>
+                </div>
+            </div>
+
+            <!-- ResNet18 + LSTM Confusion Matrix -->
+            <div class="viz-card">
+                <div class="viz-img-wrapper" onclick="zoomImage(this)">
+                    <img src="../static/download (3).png" alt="ResNet18 + LSTM Confusion Matrix">
+                </div>
+                <div class="viz-info">
+                    <h3>ResNet18 + LSTM Confusion Matrix</h3>
+                    <p>Classification details of original vs manipulated content using the high-fidelity ResNet18-LSTM temporal modeling architecture.</p>
+                </div>
+            </div>
+
+            <!-- ResNet18 + LSTM Model Performance Metrics -->
+            <div class="viz-card">
+                <div class="viz-img-wrapper" onclick="zoomImage(this)">
+                    <img src="../static/download (4).png" alt="ResNet18 + LSTM Model Performance Metrics">
+                </div>
+                <div class="viz-info">
+                    <h3>ResNet18 + LSTM Performance Metrics</h3>
+                    <p>Historical trends of precision, recall, and F1-score during the iterative training cycles of the multimodal fusion engine.</p>
+                </div>
+            </div>
+
+            <!-- Model Performance Comparison -->
+            <div class="viz-card">
+                <div class="viz-img-wrapper" onclick="zoomImage(this)">
+                    <img src="../static/download (5).png" alt="Model Performance Comparison">
+                </div>
+                <div class="viz-info">
+                    <h3>Model Performance Comparison</h3>
+                    <p>Comparative summary of validation accuracies across different architectures, identifying the most robust engine for deployment.</p>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Zoom Modal -->
+    <div class="zoom-modal" id="zoomModal" onclick="closeZoom()">
+        <span class="close-zoom">&times;</span>
+        <img class="zoom-content" id="zoomedImg">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <p class="copyright">© 2026 DeepVision Forensic Lab. Technical Analysis Suite.</p>
+        </div>
+    </footer>
+
+    <script>
+        function zoomImage(wrapper) {
+            const modal = document.getElementById('zoomModal');
+            const zoomedImg = document.getElementById('zoomedImg');
+            const clickedImg = wrapper.querySelector('img');
+            
+            zoomedImg.src = clickedImg.src;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeZoom() {
+            const modal = document.getElementById('zoomModal');
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeZoom();
+        });
+    </script>
+</body>
+</html>

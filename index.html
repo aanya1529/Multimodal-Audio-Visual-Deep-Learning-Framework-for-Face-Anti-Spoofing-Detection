@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Advanced Multimodal Deepfake Detection using state-of-the-art vision and audio AI models. Identify manipulated video and synthesized audio with high precision.">
+    <title>DeepVision | Advanced Multimodal Deepfake Detection</title>
+
+    <!-- Fonts & Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+
+    <!-- Header Navigation -->
+    <header>
+        <div class="container-fluid nav-wrapper">
+            <nav>
+                <a href="#" class="logo">
+                    <i class="fas fa-shield-halved"></i>
+                    DEEP<span>VISION</span>
+                </a>
+                <div class="nav-right">
+                    <ul class="nav-links">
+                        <li><a href="#home">Home</a></li>
+                    </ul>
+                    <a href="/logon" class="btn btn-nav">Start Now</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero container" id="home">
+        <div class="hero-content">
+            <h1>Multimodal Audio-Visual Deep Learning Framework for Face Anti-Spoofing Detection</h1>
+            <p>Our multimodal deepfake detection system analyzes both visual frames and audio frequencies to identify
+                synthetic manipulations with unprecedented accuracy.</p>
+
+            <div class="tech-badges">
+                <div class="badge"><i class="fas fa-eye"></i> Visual Temporal Analysis</div>
+                <div class="badge"><i class="fas fa-wave-square"></i> Spectral Audio Decomposition</div>
+                <div class="badge"><i class="fas fa-shield-halved"></i> Cross-Modal Verification</div>
+            </div>
+
+            <div class="hero-cta">
+                <a href="/logon" class="btn">Launch Detection Engine</a>
+                <a href="/login" class="btn btn-secondary">Learn More</a>
+            </div>
+        </div>
+
+        <div class="hero-image-wrapper">
+            <img src="{{ url_for('static', filename='deepfake_hero_image_1775455765211.png') }}"
+                alt="Deepfake Detection Visualization" class="hero-image">
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="detection-section" id="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>Precision Multimodal Analysis</h2>
+                <p>Unlike single-modality systems, DeepVision synchronizes visual artifacts and audio inconsistencies to
+                    deliver a comprehensive truth-verification report.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-eye"></i>
+                    <h3>Visual Inspection</h3>
+                    <p>Deep analysis identifies micro-inconsistencies in frame-by-frame rendering and facial geometry.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-volume-high"></i>
+                    <h3>Audio Forensics</h3>
+                    <p>Spectral analysis and frequency monitoring detects synthesized speech patterns and unnatural
+                        frequencies.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-link"></i>
+                    <h3>Multimodal Fusion</h3>
+                    <p>Cross-stream synchronization connects visual and audio streams to find discrepancies in
+                        synchronization.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+    <!-- Features Highlight Section -->
+    <section class="detection-section" id="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Why Choose DeepVision?</h2>
+                <p>Engineered for high-stakes verification in research and real-time deployment environments.</p>
+            </div>
+
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-gauge-high"></i>
+                    <h3>High Performance</h3>
+                    <p>Optimized inference engine ensures high validation accuracy even with complex dataset variations.
+                    </p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-microscope"></i>
+                    <h3>Research Grade</h3>
+                    <p>Built on top of enterprise-grade frameworks with standardized metrics like Precision, Recall, and
+                        F1-Score
+                        monitoring.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Cross-Modal Fusion</h3>
+                    <p>Detects "Cheapfakes" where only audio is swapped, as well as complex fully-synthetic Deepfakes.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container footer-content">
+            <a href="#" class="logo">
+                <i class="fas fa-shield-halved"></i>
+                DEEP<span>VISION</span>
+            </a>
+
+            <p class="copyright">© 2026 DeepVision Multimodal Systems. All Rights Reserved.</p>
+
+            <div class="social-links" style="display: flex; gap: 1.5rem;">
+                <a href="#" style="color: white;"><i class="fab fa-github"></i></a>
+                <a href="#" style="color: white;"><i class="fab fa-linkedin"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Main JS -->
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+
+</html>

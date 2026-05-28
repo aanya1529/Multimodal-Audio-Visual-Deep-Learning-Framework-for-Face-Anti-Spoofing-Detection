@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account | DeepVision Forensic Lab</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-branding">
+            <h1>Join the Elite Verification Network</h1>
+            <p>Establish your analyst credentials to deploy advanced vision and acoustic forensic models across global
+                media streams.</p>
+        </div>
+        <div class="auth-form-panel">
+            <div class="auth-card" style="max-width: 500px;">
+                <h2>Create Account</h2>
+
+                {% if message %}
+                <div class="error-alert">
+                    <i class="fas fa-circle-exclamation"></i>
+                    {{ message }}
+                </div>
+                {% endif %}
+
+                <form action="/signup" method="POST">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                        <div class="form-group">
+                            <label for="user">Username</label>
+                            <input type="text" id="user" name="user" placeholder="analyst_01" required minlength="6">
+                        </div>
+                        <div class="form-group">
+                            <label for="name">Full Name</label>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required
+                                pattern="[A-Za-z ]{3,}">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address</label>
+                        <input type="email" id="email" name="email" placeholder="john@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number</label>
+                        <input type="tel" id="mobile" name="mobile" placeholder="9876543210" required
+                            pattern="[6-9][0-9]{9}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Security Password</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required
+                            minlength="8">
+                        <small
+                            style="font-size: 0.75rem; color: var(--text-muted); margin-top: 5px; display: block;">Min.
+                            8 chars, 1 Uppercase, 1 Number.</small>
+                    </div>
+
+                    <button type="submit" class="btn" style="width: 100%; margin-top: 1rem;">Protocol: Initialize
+                        Account</button>
+
+                    <div class="auth-footer">
+                        Already have an account? <a href="/login">Sign In</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
